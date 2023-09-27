@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> 修改訂單</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+<div class="container my-5">
+    <h3> 修改訂單狀態</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#" th:action="@{/admin/updateOrder}" th:object="${order}"
+                      method="post">
+                    <div class="row">
+<!--                        <div class="form-group col-md-8">-->
+<!--                            <label for="name" class="col-form-label">訂單名稱</label>-->
+<!--                            <input type="text" th:field="*{name}" class="form-control"-->
+<!--                                   id="name" placeholder="修改訂單名稱" />-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-8">-->
+<!--                            <label for="price" class="col-form-label">價格</label>-->
+<!--                            <input type="text" th:field="*{price}" class="form-control"-->
+<!--                                   id="price" placeholder="修改價格" />-->
+<!--                        </div>-->
+                        <div class="form-group col-md-8">
+                            <label for="status" class="col-form-label">狀態</label>
+                            <input type="text" th:field="*{status}" class="form-control"
+                                   id="status" placeholder="修改狀態" />
+                        </div>
+                        <!--                        <div class="form-group col-md-8">-->
+                        <!--                            <label for="email" class="col-form-label">Publication</label>-->
+                        <!--                            <input type="text" th:field="*{publication}" class="form-control"-->
+                        <!--                                   id="publication" placeholder="Publication" />-->
+                        <!--                        </div>-->
+
+                        <div class="col-md-6">
+                            <input  onclick="return confirm('確定修改嗎?')" type="submit" class="btn btn-primary" value=" Submit ">
+                        </div>
+
+                        <input type="hidden" id="id" th:field="*{id}">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

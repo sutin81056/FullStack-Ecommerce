@@ -1,0 +1,91 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta http-equiv="x-ua-compatible" content="ie=edge">-->
+<!--    <title>新增商品</title>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="container my-5">-->
+<!--    <h3> 新增商品</h3>-->
+<!--    <div class="card">-->
+<!--        <div class="card-body">-->
+<!--            <div class="col-md-10" id="product">-->
+<!--                <form action="#" th:action="@{/admin/addProduct}" th:object="${product}" enctype="multipart/form-data"-->
+<!--                      method="post">-->
+<!--                    <div class="row">-->
+<!--                        <div class="form-group col-md-8">-->
+<!--                            <label for="name" class="col-form-label">商品名稱</label>-->
+<!--                            <input type="text" th:field="*{name}" class="form-control"-->
+<!--                                   id="name" placeholder="請輸入商品名稱" />-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-8">-->
+<!--                            <label for="price" class="col-form-label">價格</label>-->
+<!--                            <input type="text" th:field="*{price}" class="form-control"-->
+<!--                                   id="price" placeholder="請輸入價錢" />-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-8">-->
+<!--                            <label for="inventory" class="col-form-label">數量</label>-->
+<!--                            <input type="text" th:field="*{inventory}" class="form-control"-->
+<!--                                   id="inventory" placeholder="請輸入數量" />-->
+<!--                        </div>-->
+<!--&lt;!&ndash;                        <div class="form-group col-md-8">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label for="email" class="col-form-label">Publication</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input type="text" th:field="*{publication}" class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;                                   id="publication" placeholder="Publication" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                        <div class="col-md-6">-->
+<!--                            <input type="submit" class="btn btn-primary" value=" Submit ">-->
+<!--                        </div>-->
+
+<!--                        <input type="hidden" id="id" th:field="*{id}">-->
+
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+
+<!--</html>-->
+
+
+<!--&lt;!&ndash;also change col-md-10 " id="product" ", you have to delete to execute&ndash;&gt;-->
+
+<!--&lt;!&ndash;<form action="#" th:action="@{/addProduct}" th:object="${product}" enctype="multipart/form-data"&ndash;&gt;-->
+<!--&lt;!&ndash;      method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-group col-md-8">&ndash;&gt;-->
+<!--&lt;!&ndash;            <label for="name" class="col-form-label">商品名稱</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="text" th:field="*{name}" class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;                   id="name" placeholder="請輸入商品名稱" />&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-group col-md-8">&ndash;&gt;-->
+<!--&lt;!&ndash;            <label for="price" class="col-form-label">價格</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="text" th:field="*{price}" class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;                   id="price" placeholder="請輸入價錢" />&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-group col-md-8">&ndash;&gt;-->
+<!--&lt;!&ndash;            <label for="inventory" class="col-form-label">數量</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="text" th:field="*{inventory}" class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;                   id="inventory" placeholder="請輸入數量" />&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                        <div class="form-group col-md-8">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                            <label for="email" class="col-form-label">Publication</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                            <input type="text" th:field="*{publication}" class="form-control"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                                   id="publication" placeholder="Publication" />&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                        </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="submit" class="btn btn-primary" value=" Submit ">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <input type="hidden" id="id" th:field="*{id}">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->

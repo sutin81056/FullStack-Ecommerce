@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title> 修改商品</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+    <base href="/">
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+</head>
+
+<body>
+<div class="container my-5">
+    <h3> 修改商品資料</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="/admin/updateProduct" th:object="${product}"
+                      method="post">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="name" class="col-form-label">商品名稱</label>
+                            <input type="text" th:field="*{name}" class="form-control"
+                                   id="name" name="name" placeholder="修改商品名稱" />
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="price" class="col-form-label">價格</label>
+                            <input type="text" th:field="*{price}" class="form-control"
+                                   id="price" name="price" placeholder="修改價格" />
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="inventory" class="col-form-label">數量</label>
+                            <input type="text" th:field="*{inventory}" class="form-control"
+                                   id="inventory" name="inventory" placeholder="修改數量" />
+                        </div>
+                        <div class="form-group col-md-8">
+                            <select class="form-control selectpicker" name="categories"
+                                    title="選擇分類 .." multiple data-actions-box="true">
+                                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
+                                        th:selected="${product.categories.contains(category)}">[[${category.name}]]
+                                </option>
+
+                            </select>
+                        </div>
+<!--                        <div class="form-group col-md-8">-->
+<!--                            <label for="email" class="col-form-label">Publication</label>-->
+<!--                            <input type="text" th:field="*{publication}" class="form-control"-->
+<!--                                   id="publication" placeholder="Publication" />-->
+<!--                        </div>-->
+
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-primary" value=" Submit ">
+                        </div>
+
+                        <input type="hidden" id="id" name="id" th:field="*{id}">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS & jQuery -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
+<!-- Popper.JS -->
+
+
+<script type="text/javascript" src="font-awesome/js1/fontawesome.js"></script>
+
+</body>
+</html>

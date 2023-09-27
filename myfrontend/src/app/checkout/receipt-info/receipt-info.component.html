@@ -1,0 +1,138 @@
+    <!-- checkout content -->
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+          <div class="col-lg-6">
+              <div class="row">
+                  <div class="form-block p-3">
+                      <div class="form-row p-3">
+                          <div class="col"><span class="page-title">發票</span></div>
+                          <div class="col d-flex justify-content-between align-items-center progress-line"
+                              style="position: relative;">
+                              <div class="dot-complete">
+                                  <div class="dot-check" style="position: relative;">
+                                      <i class="fa fa-solid fa-check" style="color: #3F5D45;"></i>
+                                  </div>
+                              </div>
+                              <div class="dot-complete">
+                                  <div class="dot-check" style="position: relative;">
+                                      <i class="fa fa-solid fa-check" style="color: #3F5D45;"></i>
+                                  </div>
+                              </div>
+                              <div class="dot">
+                                  <div class="dot-active"></div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="container">
+
+                          <div class="row g-0 mb-4">
+                              <div class="col-6"><a href="checkout3_1.html"
+                                      class="btn btn-block invoice-btn active">電子發票</a>
+                              </div>
+                              <div class="col-6"><a href="checkout3_2.html" class="btn btn-block invoice-btn">發票郵寄</a>
+                              </div>
+                          </div>
+
+                          <div class="form-row">
+                              <div class="col">
+                                  <div class="form-group">
+                                      <label for="invoiceEmail" class="form-label form-label">電子發票編碼</label>
+                                      <input type="email" class="form-control input-box" id="invoiceEmail"
+                                          placeholder="example@mail.com">
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-row">
+                              <div class="col">
+                                  <div class="form-group">
+                                      <label for="taxID" class="form-label form-label">統一編號 (選填)</label>
+                                      <input type="text" class="form-control input-box" id="taxID"
+                                          placeholder="12345678">
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="g-0 nextstep-block">
+                      <a [routerLink]="['/', path.success]" class="btn btn-block rounded-0 nextstep-block-btn"
+                          style="font-size: 20px;">確認結帳</a>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 d-none d-lg-block">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="card rounded-0 mb-3">
+                          <div class="card-header d-flex justify-content-center align-items-center rounded-0">
+                              訂單摘要
+                          </div>
+                          <div class="card-body">
+                              <div>
+                                  <div class="col-12 d-flex justify-content-between p-2 pt-0">
+                                      <span>小計</span>
+                                      <span>NT $2700</span>
+                                  </div>
+                                  <div class="col-12 d-flex justify-content-between p-2">
+                                      <span>運費</span>
+                                      <span>NT $300</span>
+                                  </div>
+                                  <div class="col-12 d-flex justify-content-between p-2">
+                                      <span style="font-size: 20px; font-weight: bold;">總計</span>
+                                      <span style="font-size: 20px; font-weight: bold;">NT $3000</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-12">
+                      <div class="card rounded-0">
+                          <div
+                              class="card-header rounded-0 d-flex justify-content-center align-items-center rounded-0">
+                              購物清單
+                          </div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-12 mb-3">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="bg-cover"
+                                              style="background-image: url('https://bit.ly/2QvsT63');">
+                                          </div>
+                                          <div class="col d-flex flex-column product-info">
+                                              <span>焦糖馬卡龍 (2)</span>
+                                              <span>NT $900</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="bg-cover"
+                                              style="background-image: url('https://bit.ly/2QvsT63');">
+                                          </div>
+                                          <div class="col d-flex flex-column product-info">
+                                              <span>焦糖馬卡龍 (2)</span>
+                                              <span>NT $900</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                      <div class="d-flex justify-content-between align-items-center">
+                                          <div class="bg-cover"
+                                              style="background-image: url('https://bit.ly/2QvsT63');">
+                                          </div>
+                                          <div class="col d-flex flex-column product-info">
+                                              <span>焦糖馬卡龍 (2)</span>
+                                              <span>NT $900</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="row d-flex justify-content-center row-size">
+
+      <div class="row g-0 d-flex align-items-center p-0">
+          <div class="col-md-6">
+              <div class="login">
+                  <div class="row">
+                      <div class="col">
+                          <div class="text-center">
+                              <h1>會員登入</h1>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div style="background-color: #EAF0ED;">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col d-flex flex-column align-items-center d-block d-md-none">
+                                  <div class="row">
+                                      <div class="col">
+                                          <div class="btn-group my-4" role="group">
+                                              <button type="button" class="btn rounded-0 connect-btn">
+                                                  <img src="/assets/img/ic-facebook-logotype.svg" class="img-fluid"
+                                                      width="100px" style="min-height: 54px ;">
+                                              </button>
+                                              <button type="button" class="btn rounded-0 connect-btn">
+                                                  <img src="/assets/img/ic-google.svg" class="img-fluid" width="100px"
+                                                      style="min-height: 54px ;">
+                                              </button>
+                                              <button type="button" class="btn rounded-0 connect-btn">
+                                                  <img src="/assets/img/ic-yahoo.svg" class="img-fluid" width="100px"
+                                                      style="min-height: 54px ;">
+                                              </button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+
+                  <form class="p-5 pt-4" #loginForm="ngForm" (keyup.enter)="onLogin()">
+                      <div class="d-flex justify-content-between" style="position: relative;">
+                          <label for="loginEmail" style="position: absolute; top: 22%; left: 5%;">
+                              <i class="fa-solid fa-user" style="color: #3F5D45;"></i>
+                          </label>
+                          <input
+                            type="text"
+                            class="textbox form-control rounded-0 mb-3"
+                            id="username"
+                            name="username"
+                            [(ngModel)]="username"
+                            #usernameInput="ngModel"
+                            [ngClass]="{ 'is-invalid': !usernameValid }"
+                            (input)="resetAccountValidation()"
+                            placeholder="輸入您的帳號"
+                            required
+                            minlength="5"
+                            maxlength="16">
+                      </div>
+                      <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="text-danger">
+                        帳號不得少於5個字元!
+                      </div>
+
+                      <div class="d-flex justify-content-between" style="position: relative;">
+                          <label for="loginEmail" style="position: absolute; top: 27%; left: 5%;">
+                              <i class="fa fa-solid fa-key" style="color: #3F5D45;"></i>
+                          </label>
+                          <input
+                            type="password"
+                            class="textbox form-control rounded-0"
+                            id="password"
+                            name="password"
+                            [(ngModel)]="password"
+                            #passwordInput="ngModel"
+                            [ngClass]="{ 'is-invalid': !passwordValid }"
+                            (input)="resetPasswordValidation()"
+                            placeholder="輸入您的密碼"
+                            required
+                            minlength="5"
+                            maxlength="16">
+                      </div>
+                      <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger">
+                        密碼不得少於5個字元!
+                      </div>
+                      <div class="form-check mt-3">
+                          <input type="checkbox" class="form-check-input rounded-0" id="RememberMe">
+                          <label for="RememberMe" style="color: white;">記住我</label>
+                      </div>
+                      <div class="error-message" *ngIf="loginErrorMessage !== null" class="text-danger">{{ loginErrorMessage }}</div>
+                    </form>
+
+                  <div class="login-btn">
+                      <button [disabled]="loginForm.invalid" (click)="onLogin()" class="btn btn-block rounded-0 login-btn-a">登入帳號</button>
+                  </div>
+
+              </div>
+          </div>
+          <div class="col-md-6 d-none d-md-block" style="background-color: #EAF0ED;">
+              <div class="container">
+                  <div class="row">
+                      <div class="col d-flex flex-column align-items-center">
+                          <h3 style="color:#8DA291; padding: 15px; padding-top: 30px;">連結社群帳戶</h3>
+                          <div class="row">
+                              <div class="col-12 pb-3">
+                                  <button class="btn btn-block connect-btn p-0">
+                                      <img src="/assets/img/ic-facebook-logotype.svg" class="img-fluid" width="100px"
+                                          style="min-height: 54px ;">
+                                  </button>
+                              </div>
+                              <div class="col-12 pb-3">
+                                  <button class="btn btn-block connect-btn p-0">
+                                      <img src="/assets/img/ic-google.svg" class="img-fluid" width="100px"
+                                          style="min-height: 54px ;">
+                                  </button>
+                              </div>
+                              <div class="col-12 pb-3">
+                                  <button class="btn btn-block connect-btn p-0">
+                                      <img src="/assets/img/ic-yahoo.svg" class="img-fluid" width="100px"
+                                          style="min-height: 54px ;">
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
