@@ -11,7 +11,9 @@ export class ProductListComponent {
 
   // products
   products: any;
-
+  slicedProducts: any;
+  totalPages: number = 1;
+  totalPagesArray: any;
   // @Input() to product-section and decide to get category or not
   @Input() selectedCategoryId: number | null = null;
 
@@ -28,6 +30,7 @@ export class ProductListComponent {
   ngOnInit() {
     // this.products$ = this.productService.getProducts();
     this.products = [];
+    this.totalPagesArray = [];
     this.loadProducts()
   }
 
@@ -49,12 +52,16 @@ export class ProductListComponent {
     this.productService.getProducts().subscribe(result => {
       this.products = result;
       this.totalItems = this.products.length;
+      this.getDisplayedProducts()
+      this.getTotalPages()
     });
   }
   loadProductsByCategoryId(categoryId: number) {
     this.productService.getProductsByCategoryId(categoryId).subscribe(result => {
       this.products = result;
       this.totalItems = this.products.length;
+      this.getDisplayedProducts()
+      this.getTotalPages()
     });
   }
 
@@ -63,8 +70,9 @@ export class ProductListComponent {
   getDisplayedProducts() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    return this.products.slice(startIndex, endIndex);
+    this.slicedProducts = this.products.slice(startIndex, endIndex);
   }
+  // array to html
   previousPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -73,7 +81,7 @@ export class ProductListComponent {
   }
 
   nextPage() {
-    if (this.currentPage < this.getTotalPages()) {
+    if (this.currentPage < this.totalPages) {
       this.currentPage++;
       this.selectedPage++;
     }
@@ -85,12 +93,13 @@ export class ProductListComponent {
   }
 
   getTotalPages() {
-    return Math.ceil(this.totalItems / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+    this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
-  getPages() {
-    // 內容不改，index改成i+1 => 0, 1, 2 變成 1, 2, 3
-    return Array.from({ length: this.getTotalPages() }, (_, i) => i + 1);
-  }
+  // getTotalPagesArray() {
+  //   // 內容不改，index改成i+1 => 0, 1, 2 變成 1, 2, 3
+  //   this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  // }
 
 }

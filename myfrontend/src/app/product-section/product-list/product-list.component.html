@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row flex-wrap" *ngIf="products">
-      <div class="col-md-6 py-3" *ngFor="let product of getDisplayedProducts()">
+      <div class="col-md-6 py-3" *ngFor="let product of this.slicedProducts">
           <div class="card rounded-0" style="border: 1px solid rgba(181, 181, 181, 0.2);">
               <div class="product-card-tag">
                   <span>精選折扣</span>
@@ -83,13 +83,13 @@
 <div class="d-flex justify-content-center mt-5">
   <ul class="pagination pagination-lg mt-5">
     <li class="page-item" [class.disabled]="currentPage === 1">
-      <a class="page-link" (click)="previousPage()"><span>«</span></a>
+      <a class="page-link" (click)="previousPage()" (click)="getDisplayedProducts()"><span>«</span></a>
     </li>
-    <li class="page-item" *ngFor="let page of getPages()">
-      <a class="page-link" (click)="goToPage(page)" [class.active]="selectedPage === page">{{ page }}</a>
+    <li class="page-item" *ngFor="let page of this.totalPagesArray">
+      <a class="page-link" (click)="goToPage(page)" (click)="getDisplayedProducts()" [class.active]="selectedPage === page">{{ page }}</a>
     </li>
-    <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
-      <a class="page-link" (click)="nextPage()"><span>»</span></a>
+    <li class="page-item" [class.disabled]="currentPage === this.totalPages">
+      <a class="page-link" (click)="nextPage()" (click)="getDisplayedProducts()"><span>»</span></a>
     </li>
   </ul>
 </div>

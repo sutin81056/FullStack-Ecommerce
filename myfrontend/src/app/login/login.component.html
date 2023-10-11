@@ -85,7 +85,7 @@
                         密碼不得少於5個字元!
                       </div>
                       <div class="form-check mt-3">
-                          <input type="checkbox" class="form-check-input rounded-0" id="RememberMe">
+                          <input [(ngModel)]="rememberMe" type="checkbox" class="form-check-input rounded-0" id="RememberMe">
                           <label for="RememberMe" style="color: white;">記住我</label>
                       </div>
                       <div class="error-message" *ngIf="loginErrorMessage !== null" class="text-danger">{{ loginErrorMessage }}</div>

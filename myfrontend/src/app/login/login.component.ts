@@ -18,10 +18,11 @@ export class LoginComponent {
   usernameValid = true;
   passwordValid = true;
 
-  constructor(private authService: AuthService, private router: Router) { }
-
+  rememberMe: boolean = false;
   username = '';
   password = '';
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   onLogin(): void {
 
