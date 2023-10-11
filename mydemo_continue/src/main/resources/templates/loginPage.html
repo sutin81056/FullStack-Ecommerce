@@ -35,7 +35,7 @@
         <div class="col-md-6">
             <div class="login-container">
                 <h2 class="text-center">登入</h2>
-                <form action="/user/login" method="post" class="login-form">
+                <form action="/admin/lunchAllProductsPage" method="post" class="login-form">
                     <div class="form-group">
                         <label for="username">使用者名稱：</label>
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -57,6 +57,46 @@
         </div>
     </div>
 </div>
+
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function () {-->
+<!--        const loginForm = document.getElementById("login-form");-->
+<!--        const loginButton = document.getElementById("login-button");-->
+<!--        const errorMessage = document.getElementById("error-message");-->
+<!--        const successMessage = document.getElementById("success-message");-->
+
+<!--        loginButton.addEventListener("click", function () {-->
+<!--            const username = document.getElementById("username").value;-->
+<!--            const password = document.getElementById("password").value;-->
+
+<!--            const formData = {-->
+<!--                username: username,-->
+<!--                password: password-->
+<!--            };-->
+
+<!--            const jsonData = JSON.stringify(formData);-->
+
+<!--            const xhr = new XMLHttpRequest();-->
+<!--            xhr.open("POST", "/user/login");-->
+<!--            xhr.setRequestHeader("Content-Type", "application/json");-->
+<!--            xhr.onload = function () {-->
+<!--                if (xhr.status === 200) {-->
+
+<!--                    errorMessage.style.display = "none";-->
+<!--                    successMessage.style.display = "block";-->
+<!--                    successMessage.querySelector("p").textContent = "success";-->
+<!--                } else {-->
+
+<!--                    successMessage.style.display = "none";-->
+<!--                    errorMessage.style.display = "block";-->
+<!--                    errorMessage.querySelector("p").textContent = "failure：" + xhr.statusText;-->
+<!--                }-->
+<!--            };-->
+<!--            xhr.send(jsonData);-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
 </body>
 </html>
 

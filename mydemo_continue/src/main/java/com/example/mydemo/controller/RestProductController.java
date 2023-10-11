@@ -25,6 +25,7 @@ public class RestProductController {
     @GetMapping("/all")
     public ResponseEntity<List<ProductDTO>> getAllProductsExceptCategories() {
         try {
+            // image change to classpath
             List<ProductDTO> products = productService.getAllProductsExceptCategories();
             return ResponseEntity.ok(products);
         } catch (Exception e) {

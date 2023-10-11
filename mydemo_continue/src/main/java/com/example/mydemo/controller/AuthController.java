@@ -5,13 +5,15 @@ import com.example.mydemo.model.entity.dto.CredentialsDto;
 import com.example.mydemo.model.entity.dto.SignUpDto;
 import com.example.mydemo.model.entity.dto.UserDto;
 import com.example.mydemo.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +31,11 @@ public class AuthController {
         UserDto userDto = userService.login(credentialsDto);
         userDto.setToken(userAuthenticationProvider.createToken(userDto));
         return ResponseEntity.ok(userDto);
+    }
+
+    @RequestMapping(value = "/admin/lunchAllProductsPage", method = RequestMethod.GET)
+    public RedirectView redirectToLunchAllProductsPage() {
+        return new RedirectView("/admin/lunchAllProductsPage", true);
     }
 
     @PostMapping("/register")

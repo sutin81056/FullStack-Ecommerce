@@ -1,12 +1,13 @@
 package com.example.mydemo.model.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+
 import java.util.HashSet;
 import java.util.Set;
 

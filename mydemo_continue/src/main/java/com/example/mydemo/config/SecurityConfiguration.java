@@ -5,12 +5,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,76 +37,78 @@ public class SecurityConfiguration {
 
 
 
-//    @Autowired
-//    private DataSource dataSource;
-//
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        String sql="SELECT username,password FROM frontend_user WHERE username=?";
-//        String authorsql="SELECT username,role FROM frontend_user WHERE username=?";
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .usersByUsernameQuery(sql)
-//                .authoritiesByUsernameQuery(authorsql)
-//                .passwordEncoder(new BCryptPasswordEncoder());
-//    }
+    @Autowired
+    private DataSource dataSource;
 
-    private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        String sql="SELECT username,password FROM frontend_user WHERE username=?";
+        String authorsql="SELECT username,role FROM frontend_user WHERE username=?";
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery(sql)
+                .authoritiesByUsernameQuery(authorsql)
+                .passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    @Order(1)
+    public SecurityFilterChain formLoginChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/admin/**")
+                .authorizeHttpRequests(authorize -> authorize
+                                .requestMatchers("/admin","/admin/login").permitAll()
+                                .anyRequest().hasRole("ADMIN")
+                )
+                .formLogin(n->n
+                        .loginPage("/admin/login")
+                        .failureHandler(authenticationFailureHandler()).permitAll()
+                                .loginProcessingUrl("/admin/login")
+                                .defaultSuccessUrl("/admin/lunchAllProductsPage"))
+                .logout(n->n
+                        .logoutSuccessHandler(logoutSuccessHandler()).permitAll());
+//                .httpBasic(Customizer.withDefaults());
+        return http.build();
+    }
+//                .formLogin() //自定義登入頁面
+//                .loginPage("/login")
+//                .failureHandler(authenticationFailureHandler())
+//                .permitAll()
+//                .loginProcessingUrl("/login")
+//                .defaultSuccessUrl("/admin/lunchAllProductsPage")
+
+//                .logout()
+//                .logoutSuccessHandler(logoutSuccessHandler())
+//                .permitAll();
+
+
+//    private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final UserAuthenticationProvider userAuthenticationProvider;
     @Bean
+    @Order(2)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
 //                .exceptionHandling(customizer -> customizer.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .addFilterBefore(new JwtAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeRequests(request -> {
-                    request
-                            .antMatchers("/", "/login").permitAll()
-                            .antMatchers("/api/product/**").permitAll()
-                            .antMatchers("/css/**", "/js/**", "/images/**", "/api/**", "/font-awesome/**").permitAll()
-                            .antMatchers("/admin/**").permitAll()
-                            .requestMatchers(
-                                    new AntPathRequestMatcher("/user/login", HttpMethod.POST.toString()),
-                                    new AntPathRequestMatcher("/user/register", HttpMethod.POST.toString())
-                            ).permitAll()
+                .authorizeRequests((requests) ->
+                    requests
+//                            .requestMatchers("/", "/login").permitAll()
+                            .requestMatchers("/api/product/**").permitAll()
+                            .requestMatchers("/css/**", "/js/**", "/images/**", "/api/**", "/font-awesome/**").permitAll()
+//                            .requestMatchers("/admin/**").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/user/login", "/user/register").permitAll()
+//                            .requestMatchers(
+//                                    new AntPathRequestMatcher("/user/login", HttpMethod.POST.toString()),
+//                                    new AntPathRequestMatcher("/user/register", HttpMethod.POST.toString())
+//                            ).permitAll()
 
-                            .anyRequest().authenticated();
-                });
+                            .anyRequest().authenticated())
+                ;
         return http.build();
     }
 
 
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                    .antMatchers("/admin/**")
-//                    .hasAuthority("ROLE_ADMIN")
-//                    .antMatchers("/user/**")
-//                    .hasAuthority("ROLE_USER")
-//
-//                    .antMatchers("/","/login")
-//                    .permitAll()
-//
-//                    .anyRequest()
-//                    .authenticated()
-//
-//                    .and()
-//                    .csrf().disable()
-//
-//                .formLogin() //自定義登入頁面
-//                    .loginPage("/login")
-//                    .failureHandler(authenticationFailureHandler())
-//                    .permitAll()
-//                    .loginProcessingUrl("/login")
-//                    .defaultSuccessUrl("/admin/lunchAllProductsPage")
-//
-//                        .and()
-//
-//                .logout()
-//                    .logoutSuccessHandler(logoutSuccessHandler())
-//                    .permitAll();
-//    }
 
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
@@ -121,15 +125,15 @@ public class SecurityConfiguration {
 //    }
 
     // 後端登入登出用
-//    @Bean
-//    public AuthenticationFailureHandler authenticationFailureHandler() {
-//        return new CustomAuthenticationFailureHandler();
-//    }
-//
-//    @Bean
-//    public LogoutSuccessHandler logoutSuccessHandler() {
-//        return new CustomLogoutSuccessHandler();
-//    }
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
+
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler();
+    }
 
 }
 
