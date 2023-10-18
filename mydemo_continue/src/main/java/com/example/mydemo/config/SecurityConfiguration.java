@@ -50,11 +50,12 @@ public class SecurityConfiguration {
                 .authoritiesByUsernameQuery(authorsql)
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
-
+    @Bean
     @Order(1)
     public SecurityFilterChain formLoginChain(HttpSecurity http) throws Exception {
         http
                 .securityMatcher("/admin/**")
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers("/admin","/admin/login").permitAll()
                                 .anyRequest().hasRole("ADMIN")
@@ -93,7 +94,7 @@ public class SecurityConfiguration {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests((requests) ->
                     requests
-//                            .requestMatchers("/", "/login").permitAll()
+                            .requestMatchers("/admin", "/admin/login").permitAll()
                             .requestMatchers("/api/product/**").permitAll()
                             .requestMatchers("/css/**", "/js/**", "/images/**", "/api/**", "/font-awesome/**").permitAll()
 //                            .requestMatchers("/admin/**").permitAll()
