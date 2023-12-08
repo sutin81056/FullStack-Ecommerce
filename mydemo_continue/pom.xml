@@ -113,6 +113,12 @@
 <!--			<artifactId>thymeleaf</artifactId>-->
 <!--			<version>3.1.2.RELEASE</version>-->
 <!--		</dependency>-->
+		<!--	open-api	-->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.12</version>
+		</dependency>
 	</dependencies>
 
 	<build>

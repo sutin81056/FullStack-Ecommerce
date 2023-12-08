@@ -37,39 +37,39 @@ public class SecurityConfiguration {
 
 
 
-    @Autowired
-    private DataSource dataSource;
-
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        String sql="SELECT username,password FROM frontend_user WHERE username=?";
-        String authorsql="SELECT username,role FROM frontend_user WHERE username=?";
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery(sql)
-                .authoritiesByUsernameQuery(authorsql)
-                .passwordEncoder(new BCryptPasswordEncoder());
-    }
-    @Bean
-    @Order(1)
-    public SecurityFilterChain formLoginChain(HttpSecurity http) throws Exception {
-        http
-                .securityMatcher("/admin/**")
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers("/admin","/admin/login").permitAll()
-                                .anyRequest().hasRole("ADMIN")
-                )
-                .formLogin(n->n
-                        .loginPage("/admin/login")
-                        .failureHandler(authenticationFailureHandler()).permitAll()
-                                .loginProcessingUrl("/admin/login")
-                                .defaultSuccessUrl("/admin/lunchAllProductsPage"))
-                .logout(n->n
-                        .logoutSuccessHandler(logoutSuccessHandler()).permitAll());
-//                .httpBasic(Customizer.withDefaults());
-        return http.build();
-    }
+//    @Autowired
+//    private DataSource dataSource;
+//
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        String sql="SELECT username,password FROM frontend_user WHERE username=?";
+//        String authorsql="SELECT username,role FROM frontend_user WHERE username=?";
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .usersByUsernameQuery(sql)
+//                .authoritiesByUsernameQuery(authorsql)
+//                .passwordEncoder(new BCryptPasswordEncoder());
+//    }
+//    @Bean
+//    @Order(1)
+//    public SecurityFilterChain formLoginChain(HttpSecurity http) throws Exception {
+//        http
+//                .securityMatcher("/admin/**")
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests(authorize -> authorize
+//                                .requestMatchers("/admin","/admin/login").permitAll()
+//                                .anyRequest().hasRole("ADMIN")
+//                )
+//                .formLogin(n->n
+//                        .loginPage("/admin/login")
+//                        .failureHandler(authenticationFailureHandler()).permitAll()
+//                                .loginProcessingUrl("/admin/login")
+//                                .defaultSuccessUrl("/admin/lunchAllProductsPage"))
+//                .logout(n->n
+//                        .logoutSuccessHandler(logoutSuccessHandler()).permitAll());
+////                .httpBasic(Customizer.withDefaults());
+//        return http.build();
+//    }
 //                .formLogin() //自定義登入頁面
 //                .loginPage("/login")
 //                .failureHandler(authenticationFailureHandler())
@@ -97,7 +97,7 @@ public class SecurityConfiguration {
                             .requestMatchers("/admin", "/admin/login").permitAll()
                             .requestMatchers("/api/product/**").permitAll()
                             .requestMatchers("/css/**", "/js/**", "/images/**", "/api/**", "/font-awesome/**").permitAll()
-//                            .requestMatchers("/admin/**").permitAll()
+                            .requestMatchers("/admin/**").permitAll()
                             .requestMatchers(HttpMethod.POST, "/user/login", "/user/register").permitAll()
 //                            .requestMatchers(
 //                                    new AntPathRequestMatcher("/user/login", HttpMethod.POST.toString()),

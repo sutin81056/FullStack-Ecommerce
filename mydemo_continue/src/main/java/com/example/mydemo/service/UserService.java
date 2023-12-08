@@ -54,4 +54,8 @@ public class UserService {
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
         return userMapper.toUserDto(user);
     }
+
+    public Optional<User> findByUserNameU(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

@@ -22,12 +22,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
     @Column(nullable = false)
     @Size(max = 100)
     private String username;
@@ -39,9 +33,19 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    // orders
-    // User刪了訂單全刪
+    // orders, User刪了訂單全刪
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
+
+    // 在service中
+    public void add(Order order){
+        if (order!=null){
+            if (orders == null) {
+                orders = new HashSet<>();
+            }
+            orders.add(order);
+            order.setUser(this);
+        }
+    }
 
 }
