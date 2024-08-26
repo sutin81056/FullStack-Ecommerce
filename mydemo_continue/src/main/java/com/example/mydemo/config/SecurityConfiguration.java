@@ -84,6 +84,8 @@ public class SecurityConfiguration {
 
 //    private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final UserAuthenticationProvider userAuthenticationProvider;
+
+// implement JWT in Security
     @Bean
     @Order(2)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
